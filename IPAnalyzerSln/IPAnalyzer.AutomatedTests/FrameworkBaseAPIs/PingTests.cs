@@ -17,10 +17,10 @@ namespace IPAnalyzer.AutomatedTests.FrameworkBaseAPIs
         [TestMethod]
         public async Task Test_PingIpAddress()
         {
-            int timeoutMilliSeconds = 1000;
+            int timeoutMilliSeconds = 60000;
             Ping ping = new Ping();
             var pingReply = await ping.SendPingAsync(Constants.TEST_REVERSEDNS_HOSTNAME, timeout:timeoutMilliSeconds);
-            Assert.IsTrue(pingReply.Status == IPStatus.Success);
+            Assert.IsTrue(pingReply.Status == IPStatus.Success, $"Error for ping: {Constants.TEST_REVERSEDNS_HOSTNAME}, - Details: {pingReply.Status.ToString()}");
             pingReply = await ping.SendPingAsync(Constants.TEST_HOSTNAME, timeout: timeoutMilliSeconds);
             Assert.IsTrue(pingReply.Status == IPStatus.TimedOut);
         }
