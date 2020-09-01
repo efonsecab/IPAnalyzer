@@ -32,4 +32,9 @@ steps:
   inputs:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
-    publishRunAttachments: true
+- task: PublishTestResults@2
+  inputs:
+    testResultsFormat: 'VSTest'
+    testResultsFiles: '**/TEST-*.xml'
+    buildPlatform: '$(buildPlatform)'
+    buildConfiguration: '$(buildConfiguration)'
