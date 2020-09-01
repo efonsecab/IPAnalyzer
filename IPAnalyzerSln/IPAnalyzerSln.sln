@@ -1,0 +1,29 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IPAnalyzerAPI", "IPAnalyzerAPI\IPAnalyzerAPI.csproj", "{A589ECB4-67D1-47B9-A7AE-93F939648223}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IPAnalyzer.AutomatedTests", "IPAnalyzer.AutomatedTests\IPAnalyzer.AutomatedTests.csproj", "{EA42FA59-7952-42DB-9DAC-CF6EF7CBA511}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IPAnalyzer.Configuration", "IPAnalyzer.Configuration\IPAnalyzer.Configuration.csproj", "{EFD1A244-1C95-4415-9218-6D226EDC92E4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A589ECB4-67D1-47B9-A7AE-93F939648223}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A589ECB4-67D1-47B9-A7AE-93F939648223}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A589ECB4-67D1-47B9-A7AE-93F939648223}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A589ECB4-67D1-47B9-A7AE-93F939648223}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA42FA59-7952-42DB-9DAC-CF6EF7CBA511}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA42FA59-7952-42DB-9DAC-CF6EF7CBA511}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA42FA59-7952-42DB-9DAC-CF6EF7CBA511}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA42FA59-7952-42DB-9DAC-CF6EF7CBA511}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EFD1A244-1C95-4415-9218-6D226EDC92E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFD1A244-1C95-4415-9218-6D226EDC92E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFD1A244-1C95-4415-9218-6D226EDC92E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFD1A244-1C95-4415-9218-6D226EDC92E4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
