@@ -16,9 +16,9 @@ namespace PTI.WebsitesTools
 {
     public class SitemapScanner
     {
-        private ILogger<SitemapScanner> Logger { get; }
+        private ILogger Logger { get; }
 
-        public SitemapScanner(ILogger<SitemapScanner> logger=null)
+        public SitemapScanner(ILogger logger=null)
         {
             this.Logger = logger;
         }

@@ -6,9 +6,9 @@ namespace PTI.WebsitesTools
 {
     public class UrlExpander
     {
-        private ILogger<UrlExpander> Logger { get; }
+        private ILogger Logger { get; }
 
-        public UrlExpander(ILogger<UrlExpander> logger = null)
+        public UrlExpander(ILogger logger = null)
         {
             this.Logger = logger;
         }
