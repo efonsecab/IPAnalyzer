@@ -21,6 +21,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\IPAnalyzer.Configuration\IPAnalyzer.Configuration.csproj" />
+    <ProjectReference Include="..\IPAnalyzer.Services\IPAnalyzer.Services.csproj" />
     <ProjectReference Include="..\PTI.WebsitesTools\PTI.WebsitesTools.csproj" />
   </ItemGroup>
 </Project>

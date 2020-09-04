@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DnsClient" Version="1.3.2" />
+    <PackageReference Include="System.Net.Http.Json" Version="3.2.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PTI.AzureFunctions.WebsitesTools\PTI.AzureFunctions.WebsitesTools.csproj" />
+    <ProjectReference Include="..\PTI.WebsitesTools\PTI.WebsitesTools.csproj" />
+  </ItemGroup>
+
+</Project>
