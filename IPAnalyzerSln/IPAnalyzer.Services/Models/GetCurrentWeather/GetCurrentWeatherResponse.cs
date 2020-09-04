@@ -6,7 +6,7 @@ namespace IPAnalyzer.Services.Models.GetCurrentWeather
 {
     public class GetCurrentWeatherResponse
     {
-        public float Temperature { get; internal set; }
-        public string TemperatureUnit { get; internal set; }
+        public float Temperature { get; set; }
+        public string TemperatureUnit { get; set; }
     }
 }

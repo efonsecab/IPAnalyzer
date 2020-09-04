@@ -24,11 +24,13 @@ namespace PTI.AzureFunctions.WebsitesTools
                .Build();
             var azureMapsConfiguration = 
                 config.GetSection("AzureConfiguration:AzureMapsConfiguration").Get<AzureMapsConfiguration>();
+            var ipStackConfiguration = config.GetSection("IpStackConfiguration").Get<IpStackConfiguration>();
             builder.Services.AddSingleton<AzureMapsConfiguration>(azureMapsConfiguration);
+            builder.Services.AddSingleton<IpStackConfiguration>(ipStackConfiguration);
             builder.Services.AddTransient<IAzureMapsService, AzureMapsService>();
             builder.Services.AddTransient<IWeatherService, WeatherService>();
             builder.Services.AddTransient<IRobotsService, RobotsService>();
-            builder.Services.AddSingleton<IConfiguration>(config);
+            builder.Services.AddTransient<IGeoLocationService, GeoLocationService>();
         }
     }
 }
