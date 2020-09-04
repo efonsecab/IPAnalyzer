@@ -6,6 +6,7 @@ using IPAnalyzer.Services.Models.GetCurrentWeather;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Text;
@@ -16,38 +17,30 @@ namespace IPAnalyzer.Services
 {
     public class WeatherService: IWeatherService
     {
-        private AzureMapsConfiguration AzureMapsConfiguration { get; }
+        private IAzureMapsService AzureMapsService { get; }
         private HttpClient HttpClient { get; }
         private ILogger<WeatherService> Logger { get; }
 
-        public WeatherService(AzureMapsConfiguration azureMapsConfiguration, HttpClient httpClient, 
-            ILogger<WeatherService> logger)
+        public WeatherService(IAzureMapsService azureMapsService, HttpClient httpClient, 
+            ILogger<WeatherService> logger, HttpClient httpClient1)
         {
-            this.AzureMapsConfiguration = azureMapsConfiguration;
+            this.AzureMapsService = azureMapsService;
             this.HttpClient = httpClient;
             this.Logger = logger;
+            this.HttpClient = httpClient;
         }
 
-        public async Task<GetCurrentWeatherResponse> GetCurrentWeatherAsync(GeoCoordinates geoCoordinates, 
+        public async Task<List<GetCurrentWeatherResponse>> GetCurrentWeatherAsync(GeoCoordinates geoCoordinates, 
             CancellationToken cancellationToken=default)
         {
-            try
+            var getCurrentConditionsResponse = await this.AzureMapsService
+                .GetCurrentConditionsAsync(geoCoordinates, cancellationToken);
+            var result = getCurrentConditionsResponse.results.Select(p => new GetCurrentWeatherResponse() 
             {
-                string query = $"{geoCoordinates.Latitude},{geoCoordinates.Longitude}";
-                string requestUrl = $"https://atlas.microsoft.com/weather/currentConditions/json" +
-                    $"?subscription-key={this.AzureMapsConfiguration.Key}" +
-                    $"&api-version=1.0" +
-                    $"&query={query}" +
-                    $"&details={true}" +
-                    $"&duration={0}";
-                var response = await this.HttpClient.GetFromJsonAsync<GetCurrentWeatherResponse>(requestUrl, cancellationToken);
-                return response;
-            }
-            catch ( Exception ex)
-            {
-                this.Logger?.LogError(ex, ex.Message);
-                throw;
-            }
+                Temperature = p.temperature.value,
+                TemperatureUnit = p.temperature.unit,
+            }).ToList();
+            return result;
         }
     }
 }

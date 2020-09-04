@@ -1,5 +1,5 @@
 ﻿using IPAnalyzer.Services.Models.GeoLocation;
-using IPAnalyzer.Services.Models.GetCurrentWeather;
+using IPAnalyzer.Services.Models.GetCurrentConditions;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace IPAnalyzer.Services.Interfaces
 {
-    public interface IWeatherService
+    public interface IAzureMapsService
     {
-        Task<List<GetCurrentWeatherResponse>> GetCurrentWeatherAsync(GeoCoordinates geoCoordinates,
+        Task<GetCurrentConditionsResponse> GetCurrentConditionsAsync(GeoCoordinates geoCoordinates,
             CancellationToken cancellationToken = default);
     }
 }
