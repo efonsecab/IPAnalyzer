@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using IPAnalyzer.Services;
+using IPAnalyzer.Services.Interfaces;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.DurableTask;
 using Microsoft.Azure.WebJobs.Extensions.Http;
@@ -33,13 +35,13 @@ namespace PTI.AzureFunctions.WebsitesTools
         [FunctionName("GetSitemapsInfo_Process")]
         public static async Task<GetSitemapInfoResultModel> ProcessAsync([ActivityTrigger] string url, ILogger log)
         {
+            RobotsService robotsService = new RobotsService(log);
             GetSitemapInfoResultModel result = null;
-            SitemapScanner sitemapScanner = new PTI.WebsitesTools.SitemapScanner(log);
-            var getsitgetSitemapsUrlResult = await sitemapScanner.GetSitemapsUrls(url);
+            var robotsInfo = await robotsService.GetRobotsInfoAsync(url);
             result = new GetSitemapInfoResultModel()
             {
                 Url = url,
-                SitemapsUrls = getsitgetSitemapsUrlResult
+                SitemapsUrls = robotsInfo.SitemapsUrls
             };
             return result;
         }

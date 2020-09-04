@@ -1,7 +1,6 @@
 ﻿using DnsClient.Internal;
-using ImpromptuInterface;
+using IPAnalyzer.Services.Interfaces;
 using IPAnalyzer.Services.Models.Robots;
-using Microsoft.Build.Utilities;
 using Microsoft.Extensions.Logging;
 using PTI.WebsitesTools;
 using System;
@@ -9,19 +8,19 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using ILogger = Microsoft.Extensions.Logging.ILogger;
 
 namespace IPAnalyzer.Services
 {
-    public class RobotsService
+    public class RobotsService : IRobotsService
     {
-        private ILogger<RobotsService> Logger { get; }
+        private ILogger Logger { get; }
         private SitemapScanner SitemapScanner { get; }
 
-        public RobotsService(ILogger<RobotsService> logger, 
-            SitemapScanner sitemapScanner)
+        public RobotsService(ILogger logger)
         {
             this.Logger = logger;
-            this.SitemapScanner = SitemapScanner;
+            SitemapScanner = new SitemapScanner(logger);
         }
 
         /// <summary>

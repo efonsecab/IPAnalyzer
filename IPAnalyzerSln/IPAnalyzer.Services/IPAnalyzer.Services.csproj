@@ -10,7 +10,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PTI.AzureFunctions.WebsitesTools\PTI.AzureFunctions.WebsitesTools.csproj" />
     <ProjectReference Include="..\PTI.WebsitesTools\PTI.WebsitesTools.csproj" />
   </ItemGroup>
 
