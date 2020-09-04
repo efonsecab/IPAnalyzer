@@ -14,30 +14,33 @@ using PTI.WebsitesTools;
 
 namespace PTI.AzureFunctions.WebsitesTools
 {
-    public static class GetSitemapsInfo
+    public class GetSitemapsInfo
     {
+        private IRobotsService RobotsService { get; }
+
+        public GetSitemapsInfo(IRobotsService robotsService)
+        {
+            this.RobotsService = robotsService;
+        }
         [FunctionName("GetSitemapsInfo")]
-        public static async Task<List<GetSitemapInfoResultModel>> RunOrchestrator(
+        public async Task<List<GetSitemapInfoResultModel>> RunOrchestrator(
             [OrchestrationTrigger] IDurableOrchestrationContext context)
         {
             var outputs = new List<GetSitemapInfoResultModel>();
             var inputData = context.GetInput<GetSitemapsInfoModel>();
-            // Replace "hello" with the name of your Durable Activity Function.
             foreach (var singleUrl in inputData.WebsitesUrls)
             {
                 outputs.Add(await context.CallActivityAsync<GetSitemapInfoResultModel>("GetSitemapsInfo_Process", singleUrl));
             }
 
-            // returns ["Hello Tokyo!", "Hello Seattle!", "Hello London!"]
             return outputs;
         }
 
         [FunctionName("GetSitemapsInfo_Process")]
-        public static async Task<GetSitemapInfoResultModel> ProcessAsync([ActivityTrigger] string url, ILogger log)
+        public async Task<GetSitemapInfoResultModel> ProcessAsync([ActivityTrigger] string url, ILogger log)
         {
-            RobotsService robotsService = new RobotsService(log);
             GetSitemapInfoResultModel result = null;
-            var robotsInfo = await robotsService.GetRobotsInfoAsync(url);
+            var robotsInfo = await this.RobotsService.GetRobotsInfoAsync(url);
             result = new GetSitemapInfoResultModel()
             {
                 Url = url,
@@ -47,7 +50,7 @@ namespace PTI.AzureFunctions.WebsitesTools
         }
 
         [FunctionName("GetSitemapsInfo_HttpStart")]
-        public static async Task<HttpResponseMessage> HttpStart(
+        public async Task<HttpResponseMessage> HttpStart(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post")] HttpRequestMessage req,
             [DurableClient] IDurableOrchestrationClient starter,
             ILogger log)

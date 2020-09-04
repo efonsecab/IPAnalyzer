@@ -27,6 +27,7 @@ namespace PTI.AzureFunctions.WebsitesTools
             builder.Services.AddSingleton<AzureMapsConfiguration>(azureMapsConfiguration);
             builder.Services.AddTransient<IAzureMapsService, AzureMapsService>();
             builder.Services.AddTransient<IWeatherService, WeatherService>();
+            builder.Services.AddTransient<IRobotsService, RobotsService>();
             builder.Services.AddSingleton<IConfiguration>(config);
         }
     }
