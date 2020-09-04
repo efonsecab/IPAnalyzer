@@ -12,7 +12,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PTI.WebsitesTools", "PTI.We
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PTI.AzureFunctions.WebsitesTools", "PTI.AzureFunctions.WebsitesTools\PTI.AzureFunctions.WebsitesTools.csproj", "{8481153A-FDE0-4FB7-9525-6E669AC76591}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IPAnalyzer.Services", "IPAnalyzer.Services\IPAnalyzer.Services.csproj", "{3C135EDA-49C3-4198-BC8B-2849DBFC9A1B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IPAnalyzer.Services", "IPAnalyzer.Services\IPAnalyzer.Services.csproj", "{3C135EDA-49C3-4198-BC8B-2849DBFC9A1B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

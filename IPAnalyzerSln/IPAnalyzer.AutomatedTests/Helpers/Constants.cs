@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IPAnalyzer.Services.Models.GeoLocation;
+using System;
 namespace IPAnalyzer.AutomatedTests.Helpers
 {
     public class Constants
@@ -9,5 +10,10 @@ namespace IPAnalyzer.AutomatedTests.Helpers
         public const string TEST_SITEMAP_YAHOO_URL = "https://www.yahoo.com";
         public const string TEST_SITEMAP_XML_URL =
             "https://www.microsoft.com/en-us/store/locations/store-locations-sitemap.xml";
+        public static readonly GeoCoordinates TEST_GEOCOORDINATES = new GeoCoordinates()
+        {
+            Latitude = 9.9983731,
+            Longitude = -84.1306463
+        };
     }
 }

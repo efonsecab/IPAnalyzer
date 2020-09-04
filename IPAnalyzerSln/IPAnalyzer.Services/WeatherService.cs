@@ -21,26 +21,31 @@ namespace IPAnalyzer.Services
         private HttpClient HttpClient { get; }
         private ILogger<WeatherService> Logger { get; }
 
-        public WeatherService(IAzureMapsService azureMapsService, HttpClient httpClient, 
-            ILogger<WeatherService> logger, HttpClient httpClient1)
+        public WeatherService(IAzureMapsService azureMapsService, ILogger<WeatherService> logger)
         {
             this.AzureMapsService = azureMapsService;
-            this.HttpClient = httpClient;
             this.Logger = logger;
-            this.HttpClient = httpClient;
         }
 
         public async Task<List<GetCurrentWeatherResponse>> GetCurrentWeatherAsync(GeoCoordinates geoCoordinates, 
             CancellationToken cancellationToken=default)
         {
-            var getCurrentConditionsResponse = await this.AzureMapsService
-                .GetCurrentConditionsAsync(geoCoordinates, cancellationToken);
-            var result = getCurrentConditionsResponse.results.Select(p => new GetCurrentWeatherResponse() 
+            try
             {
-                Temperature = p.temperature.value,
-                TemperatureUnit = p.temperature.unit,
-            }).ToList();
-            return result;
+                var getCurrentConditionsResponse = await this.AzureMapsService
+                    .GetCurrentConditionsAsync(geoCoordinates, cancellationToken);
+                var result = getCurrentConditionsResponse.results.Select(p => new GetCurrentWeatherResponse()
+                {
+                    Temperature = p.temperature.value,
+                    TemperatureUnit = p.temperature.unit,
+                }).ToList();
+                return result;
+            }
+            catch (Exception ex)
+            {
+                this.Logger?.LogError(ex, ex.Message);
+                throw;
+            }
         }
     }
 }

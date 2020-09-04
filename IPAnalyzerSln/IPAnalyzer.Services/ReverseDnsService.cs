@@ -36,7 +36,7 @@ namespace IPAnalyzer.Services
                 return null;
             else
             {
-                List<string> domainNames = response.AllRecords.Select(p => p.DomainName.Value).ToList();
+                List<string> domainNames = response.Answers.PtrRecords().Select(p => p.PtrDomainName.Value).ToList();
                 return domainNames;
             }
         }

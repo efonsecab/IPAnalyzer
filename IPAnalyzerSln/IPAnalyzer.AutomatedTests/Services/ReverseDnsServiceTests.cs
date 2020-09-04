@@ -1,4 +1,5 @@
 ﻿using DnsClient;
+using IPAnalyzer.AutomatedTests.Helpers;
 using IPAnalyzer.Services;
 using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -17,12 +18,15 @@ namespace IPAnalyzer.AutomatedTests.Services
         [TestMethod()]
         public async Task Test_ResolveDomainName()
         {
-            ReverseDnsService reverseDnsService = new ReverseDnsService(new LookupClient(), null);
-            var ipAddress = IPAddress.Parse("127.0.0.2");
+            DnsClient.LookupClient lookupClient = new LookupClient();
+            var hostEntry = await lookupClient.GetHostEntryAsync(Constants.TEST_REVERSEDNS_HOSTNAME);
+            var ipAddress = hostEntry.AddressList.First();
+            ReverseDnsService reverseDnsService = new ReverseDnsService(lookupClient, null);
             var response = await reverseDnsService.ResolveDomainNameAsync(ipAddress);
-            Assert.IsTrue(response.Count() > 0, $"Error retrieving domain names for : {ipAddress}");
-            ipAddress = IPAddress.Parse("1.1.1.1");
+            Assert.IsNotNull(response, $"Error getting domain name for: {ipAddress}");
+            ipAddress = IPAddress.Parse("127.0.0.2");
             response = await reverseDnsService.ResolveDomainNameAsync(ipAddress);
+            Assert.AreEqual(null, response, $"Invalid result for: {ipAddress}");
         }
     }
 }

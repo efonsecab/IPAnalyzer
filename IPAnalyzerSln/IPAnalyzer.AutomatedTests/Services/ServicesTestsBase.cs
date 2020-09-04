@@ -31,13 +31,16 @@ namespace IPAnalyzer.AutomatedTests.Services
             //    );
             this.Services = new ServiceCollection();
             this.Services.AddHttpClient();
-            this.Services.AddTransient<HttpClient>();
-            this.Services.AddScoped<ILogger<AzureMapsService>, Logger<AzureMapsService>>();
             this.Services.AddSingleton(this.AzureMapsConfiguration);
-            this.Services.AddScoped<IAzureMapsService, AzureMapsService>();
+            this.Services.AddTransient<HttpClient>();
+            //this.Services.AddTransient<ILogger<AzureMapsService>, Logger<AzureMapsService>>();
+            //this.Services.AddTransient<ILogger<WeatherService>, Logger<WeatherService>>();
+            this.Services.AddTransient<IAzureMapsService, AzureMapsService>();
+            this.Services.AddTransient<IWeatherService, WeatherService>();
             this.ServiceProvider = this.Services.BuildServiceProvider();
             //this.HttpClientFactory = this.Services.BuildServiceProvider().GetRequiredService<IHttpClientFactory>();
             this.AzureMapsService = this.ServiceProvider.GetRequiredService<IAzureMapsService>();
+            this.WeatherService = this.ServiceProvider.GetRequiredService<IWeatherService>();
             //this.ServerClient = this.Server.CreateClient();
         }
 
@@ -47,6 +50,7 @@ namespace IPAnalyzer.AutomatedTests.Services
         internal protected ServiceCollection Services { get; }
         public ServiceProvider ServiceProvider { get; }
         public IAzureMapsService AzureMapsService { get; }
+        public IWeatherService WeatherService { get; }
         internal protected HttpClient ServerClient { get; }
     }
 }
